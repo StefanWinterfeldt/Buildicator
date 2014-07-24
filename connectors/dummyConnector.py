@@ -1,4 +1,4 @@
-#Copyright 2014 Stefan Winterfeldt <stefan.winterfeldt@bitz.it>
+# Copyright 2014 Stefan Winterfeldt <stefan.winterfeldt@bitz.it>
 #                                  <stefan.winterfeldt@outlook.de>
 #
 #This file is part of Buildicator.
@@ -27,18 +27,21 @@ from connectors.abstractConnector import AbstractConnector
 import random
 import libs.statusEnum as statusEnum
 
-class DummyConnector (AbstractConnector):
-	"""A connector that simply returns a status at random.
-	
-	This connector is useful for testing message sinks or the device it is 
-	running on. It does not connect to anything, therefore it does not use any
-	arguments. 
-	"""
-	def __init__ (self, args):
-		pass
-		
-	def getStatus (self):
-		return random.choice ([statusEnum.STATUS_ERROR, statusEnum.STATUS_FAILURE, statusEnum.STATUS_SUCCESS])
 
-def getInstance (args):
-	return DummyConnector (args)
+class DummyConnector(AbstractConnector):
+    """A connector that simply returns a status at random.
+
+    This connector is useful for testing message sinks or the device it is
+    running on. It does not connect to anything, therefore it does not use any
+    arguments.
+    """
+
+    def __init__(self, args):
+        pass
+
+    def getStatus(self):
+        return random.choice([statusEnum.STATUS_ERROR, statusEnum.STATUS_FAILURE, statusEnum.STATUS_SUCCESS])
+
+
+def getInstance(args):
+    return DummyConnector(args)

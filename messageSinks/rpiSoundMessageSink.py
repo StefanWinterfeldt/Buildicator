@@ -1,4 +1,4 @@
-#Copyright 2014 Stefan Winterfeldt <stefan.winterfeldt@bitz.it>
+# Copyright 2014 Stefan Winterfeldt <stefan.winterfeldt@bitz.it>
 #                                  <stefan.winterfeldt@outlook.de>
 #
 #This file is part of Buildicator.
@@ -27,36 +27,39 @@ from messageSinks.abstractMessageSink import AbstractMessageSink
 import libs.statusEnum as statusEnum
 import subprocess
 
-class RPISoundMessageSink (AbstractMessageSink):
-	"""Plays the given sound when running on a Raspberry Pi.
-	
-	The sound is only played when the status changes from its previous value.
-	This message sink uses the following arguments:
-		errorSound - The sound file to play in case of an error status.
-		failureSound - The sound file to play in case of a failure status.
-		successSound - The sound file to play in case of a success status.
-	"""
-	def __init__ (self, args):
-		self.errorSoundFilename = args['errorSound']
-		self.failureSoundFilename = args['failureSound']
-		self.successSoundFilename = args['successSound']
-		self.lastStatus = None
-		
-	def playSound (self, soundFilename):
-		subprocess.call (['aplay', soundFilename])
-		
-	def statusIsNew (self, status):
-		return (self.lastStatus != None) and (status != self.lastStatus)
-		
-	def showStatus (self, status):
-		if self.statusIsNew (status):
-			if status == statusEnum.STATUS_ERROR:
-				self.playSound (self.errorSoundFilename)
-			elif status == statusEnum.STATUS_FAILURE:
-				self.playSound (self.failureSoundFilename)
-			elif status == statusEnum.STATUS_SUCCESS:
-				self.playSound (self.successSoundFilename)
-		self.lastStatus = status
-			
-def getInstance (args):
-	return RPISoundMessageSink (args)
+
+class RPISoundMessageSink(AbstractMessageSink):
+    """Plays the given sound when running on a Raspberry Pi.
+
+    The sound is only played when the status changes from its previous value.
+    This message sink uses the following arguments:
+        errorSound - The sound file to play in case of an error status.
+        failureSound - The sound file to play in case of a failure status.
+        successSound - The sound file to play in case of a success status.
+    """
+
+    def __init__(self, args):
+        self.errorSoundFilename = args['errorSound']
+        self.failureSoundFilename = args['failureSound']
+        self.successSoundFilename = args['successSound']
+        self.lastStatus = None
+
+    def playSound(self, soundFilename):
+        subprocess.call(['aplay', soundFilename])
+
+    def statusIsNew(self, status):
+        return (self.lastStatus != None) and (status != self.lastStatus)
+
+    def showStatus(self, status):
+        if self.statusIsNew(status):
+            if status == statusEnum.STATUS_ERROR:
+                self.playSound(self.errorSoundFilename)
+            elif status == statusEnum.STATUS_FAILURE:
+                self.playSound(self.failureSoundFilename)
+            elif status == statusEnum.STATUS_SUCCESS:
+                self.playSound(self.successSoundFilename)
+        self.lastStatus = status
+
+
+def getInstance(args):
+    return RPISoundMessageSink(args)

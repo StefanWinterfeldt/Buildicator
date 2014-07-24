@@ -1,4 +1,4 @@
-#Copyright 2014 Stefan Winterfeldt <stefan.winterfeldt@bitz.it>
+# Copyright 2014 Stefan Winterfeldt <stefan.winterfeldt@bitz.it>
 #                                  <stefan.winterfeldt@outlook.de>
 #
 #This file is part of Buildicator.
@@ -27,44 +27,47 @@ import os.path
 import libs.statusEnum as statusEnum
 import libs.pins as pins
 
-class RPIPinMessageSink (AbstractMessageSink):
-	"""Switches the given pins on or off when running on a Raspberry Pi.
-	
-	This message sink uses the following arguments:
-		errorPin - The pin to power in case of an error status.
-		failurePin - The pin to power in case of a failure status.
-		successPin - The pin to power in case of a success status.
-	"""
-	def __init__ (self, args):
-		self.errorPin = args['errorPin']
-		self.failurePin = args['failurePin']
-		self.successPin = args['successPin']
-		self.initializePins ()
-		
-	def initializePin (self, pin):
-		if pins.pinExists (pin):
-			pins.unexport (pin)
-		pins.export (pin)
-		pins.setDirectionOut (pin)
-		
-	def initializePins (self):
-		self.initializePin (self.errorPin)
-		self.initializePin (self.failurePin)
-		self.initializePin (self.successPin)
-		
-	def setAllPinsOff (self):
-		pins.setOff (self.errorPin)
-		pins.setOff (self.failurePin)
-		pins.setOff (self.successPin)
-		
-	def showStatus (self, status):
-		self.setAllPinsOff ()
-		if status == statusEnum.STATUS_ERROR:
-			pins.setOn (self.errorPin)
-		elif status == statusEnum.STATUS_FAILURE:
-			pins.setOn (self.failurePin)
-		elif status == statusEnum.STATUS_SUCCESS:
-			pins.setOn (self.successPin)
-			
-def getInstance (args):
-	return RPIPinMessageSink (args)
+
+class RPIPinMessageSink(AbstractMessageSink):
+    """Switches the given pins on or off when running on a Raspberry Pi.
+
+    This message sink uses the following arguments:
+        errorPin - The pin to power in case of an error status.
+        failurePin - The pin to power in case of a failure status.
+        successPin - The pin to power in case of a success status.
+    """
+
+    def __init__(self, args):
+        self.errorPin = args['errorPin']
+        self.failurePin = args['failurePin']
+        self.successPin = args['successPin']
+        self.initializePins()
+
+    def initializePin(self, pin):
+        if pins.pinExists(pin):
+            pins.unexport(pin)
+        pins.export(pin)
+        pins.setDirectionOut(pin)
+
+    def initializePins(self):
+        self.initializePin(self.errorPin)
+        self.initializePin(self.failurePin)
+        self.initializePin(self.successPin)
+
+    def setAllPinsOff(self):
+        pins.setOff(self.errorPin)
+        pins.setOff(self.failurePin)
+        pins.setOff(self.successPin)
+
+    def showStatus(self, status):
+        self.setAllPinsOff()
+        if status == statusEnum.STATUS_ERROR:
+            pins.setOn(self.errorPin)
+        elif status == statusEnum.STATUS_FAILURE:
+            pins.setOn(self.failurePin)
+        elif status == statusEnum.STATUS_SUCCESS:
+            pins.setOn(self.successPin)
+
+
+def getInstance(args):
+    return RPIPinMessageSink(args)

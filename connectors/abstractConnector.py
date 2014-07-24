@@ -1,4 +1,4 @@
-#Copyright 2014 Stefan Winterfeldt <stefan.winterfeldt@bitz.it>
+# Copyright 2014 Stefan Winterfeldt <stefan.winterfeldt@bitz.it>
 #                                  <stefan.winterfeldt@outlook.de>
 #
 #This file is part of Buildicator.
@@ -19,15 +19,17 @@
 """Contains the abstract connector class.
 """
 
-class AbstractConnector ():
-	"""The abstract base class of all connectors.
 
-	You could of course pass a connector object to the manager that does not 
-	subclass this. It exists mainly to show that all connectors should accept 
-	the 'args' parameter upon instantiation and implement a 'getStatus' method.
-	"""
-	def __init__ (self, args):
-		raise NotImplementedError ()
-		
-	def getStatus (self):
-		raise NotImplementedError ()
+class AbstractConnector():
+    """The abstract base class of all connectors.
+
+    You could of course pass a connector object to the manager that does not
+    subclass this. It exists mainly to show that all connectors should accept
+    the 'args' parameter upon instantiation and implement a 'getStatus' method.
+    """
+
+    def __init__(self, args):
+        raise NotImplementedError()
+
+    def getStatus(self):
+        raise NotImplementedError()

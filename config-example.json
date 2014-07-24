@@ -1,7 +1,8 @@
 {
 	"interval" : 20,
 	"projects" : [
-		{"name" : "TEST",
+		{
+		    "name" : "TEST",
 			"connector" : {
 				"name" : "dummy",
 				"args" : {}
@@ -25,7 +26,8 @@
 				}
 			]
 		},
-		{"name" : "TEST2",
+		{
+		    "name" : "TEST2",
 			"connector" : {
 				"name" : "teamCityREST8",
 				"args" : {

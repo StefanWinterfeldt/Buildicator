@@ -1,6 +1,6 @@
 #!
 
-#Copyright 2014 Stefan Winterfeldt <stefan.winterfeldt@bitz.it>
+# Copyright 2014 Stefan Winterfeldt <stefan.winterfeldt@bitz.it>
 #                                  <stefan.winterfeldt@outlook.de>
 #
 #This file is part of Buildicator.
@@ -33,59 +33,71 @@ import json
 from libs.project import Project
 import time
 
-def getArguments ():
-	parser = argparse.ArgumentParser()
-	parser.add_argument ('-c', help = 'configuration file path', type = str, default='config.json')
-	return parser.parse_args ()
-	
-def getConnector (connectorConfiguration):
-	return getObjectFromConfiguration (connectorConfiguration, 'Connector', 'connectors')
 
-def getDynamicObject (moduleName, args, location=''):
-	if location !='':
-		module = importlib.import_module (location+'.'+moduleName)
-	else:
-		module = importlib.import_module (moduleName)
-	return module.getInstance (args)
-	
-def getMessageSink (messageSinkConfiguration):
-	return getObjectFromConfiguration (messageSinkConfiguration, 'MessageSink', 'messageSinks')
-	
-def getMessageSinks (messageSinkConfigurations):
-	messageSinks = []
-	for messageSinkConfiguration in messageSinkConfigurations: 
-		messageSinks.append (getMessageSink (messageSinkConfiguration))
-	return messageSinks
-	
-def getObjectFromConfiguration (configuration, objectName, location=''):
-	return getDynamicObject (configuration['name']+objectName, configuration['args'], location)
+def getArguments():
+    parser = argparse.ArgumentParser()
+    parser.add_argument('-c', help='configuration file path', type=str, default='config.json')
+    return parser.parse_args()
 
-def loadConfig (path):
-	return json.load (open (path))
-	
-def initializeProject (projectConfiguration):
-	connector = getConnector (projectConfiguration['connector'])
-	messageSinks = getMessageSinks (projectConfiguration['messageSinks'])
-	return Project (connector, messageSinks)
 
-def initializeProjects (configuration):
-	projects = []
-	for projectConfiguration in configuration['projects']:
-		projects.append (initializeProject (projectConfiguration))
-	return projects
-	
-def refreshProjectsPeriodically (projects, interval):
-	while True:
-		for project in projects:
-			project.refreshStatus ()
-		time.sleep (interval)
+def getConnector(connectorConfiguration):
+    return getObjectFromConfiguration(connectorConfiguration, 'Connector', 'connectors')
 
-def main ():
-	arguments = getArguments ()
-	configuration = loadConfig (arguments.c)
-	projects = initializeProjects (configuration)
-	refreshProjectsPeriodically (projects, configuration['interval'])
+
+def getDynamicObject(moduleName, args, location=''):
+    if location != '':
+        module = importlib.import_module(location + '.' + moduleName)
+    else:
+        module = importlib.import_module(moduleName)
+    return module.getInstance(args)
+
+
+def getMessageSink(messageSinkConfiguration):
+    return getObjectFromConfiguration(messageSinkConfiguration, 'MessageSink', 'messageSinks')
+
+
+def getMessageSinks(messageSinkConfigurations):
+    messageSinks = []
+    for messageSinkConfiguration in messageSinkConfigurations:
+        messageSinks.append(getMessageSink(messageSinkConfiguration))
+    return messageSinks
+
+
+def getObjectFromConfiguration(configuration, objectName, location=''):
+    return getDynamicObject(configuration['name'] + objectName, configuration['args'], location)
+
+
+def loadConfig(path):
+    return json.load(open(path))
+
+
+def initializeProject(projectConfiguration):
+    connector = getConnector(projectConfiguration['connector'])
+    messageSinks = getMessageSinks(projectConfiguration['messageSinks'])
+    return Project(connector, messageSinks)
+
+
+def initializeProjects(configuration):
+    projects = []
+    for projectConfiguration in configuration['projects']:
+        projects.append(initializeProject(projectConfiguration))
+    return projects
+
+
+def refreshProjectsPeriodically(projects, interval):
+    while True:
+        for project in projects:
+            project.refreshStatus()
+        time.sleep(interval)
+
+
+def main():
+    arguments = getArguments()
+    configuration = loadConfig(arguments.c)
+    projects = initializeProjects(configuration)
+    refreshProjectsPeriodically(projects, configuration['interval'])
+
 
 if __name__ == '__main__':
-	main()
+    main()
 

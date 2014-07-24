@@ -1,7 +1,8 @@
 {
 	"interval" : 10,
 	"projects" : [
-		{"name" : "MIMS",
+		{
+		    "name" : "Skeleton",
 			"connector" : {
 				"name" : "dummy",
 				"args" : {}

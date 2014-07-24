@@ -1,4 +1,4 @@
-#Copyright 2014 Stefan Winterfeldt <stefan.winterfeldt@bitz.it>
+# Copyright 2014 Stefan Winterfeldt <stefan.winterfeldt@bitz.it>
 #                                  <stefan.winterfeldt@outlook.de>
 #
 #This file is part of Buildicator.
@@ -19,15 +19,17 @@
 """Contains the abstract message sink class.
 """
 
-class AbstractMessageSink ():
-	"""The abstract base class of all message sinks.
 
-	You could of course pass a message sink object to the manager that does not 
-	subclass this. It exists mainly to show that all message sinks should accept 
-	the 'args' parameter upon instantiation and implement a 'showStatus' method.
-	"""
-	def __init__ (self, args):
-		raise NotImplementedError ()
-		
-	def showStatus (self, status):
-		raise NotImplementedError ()
+class AbstractMessageSink():
+    """The abstract base class of all message sinks.
+
+    You could of course pass a message sink object to the manager that does not
+    subclass this. It exists mainly to show that all message sinks should accept
+    the 'args' parameter upon instantiation and implement a 'showStatus' method.
+    """
+
+    def __init__(self, args):
+        raise NotImplementedError()
+
+    def showStatus(self, status):
+        raise NotImplementedError()

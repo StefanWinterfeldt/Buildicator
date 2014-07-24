@@ -1,4 +1,4 @@
-#Copyright 2014 Stefan Winterfeldt <stefan.winterfeldt@bitz.it>
+# Copyright 2014 Stefan Winterfeldt <stefan.winterfeldt@bitz.it>
 #                                  <stefan.winterfeldt@outlook.de>
 #
 #This file is part of Buildicator.
@@ -18,17 +18,20 @@
 
 """Contains the project class.
 """
-class Project ():
-	"""Uses a connector to get a status and message sinks to show it.
-	
-	A project can only have one connector to get information about its current
-	status. This status can however be show on multiple different message sinks.
-	"""
-	def __init__ (self, connector, messageSinks):
-		self.connector = connector
-		self.messageSinks = messageSinks
-		
-	def refreshStatus (self):
-		status = self.connector.getStatus ()
-		for sink in self.messageSinks:
-			sink.showStatus (status)
+
+
+class Project():
+    """Uses a connector to get a status and message sinks to show it.
+
+    A project can only have one connector to get information about its current
+    status. This status can however be show on multiple different message sinks.
+    """
+
+    def __init__(self, connector, messageSinks):
+        self.connector = connector
+        self.messageSinks = messageSinks
+
+    def refreshStatus(self):
+        status = self.connector.getStatus()
+        for sink in self.messageSinks:
+            sink.showStatus(status)

@@ -1,4 +1,4 @@
-#Copyright 2014 Stefan Winterfeldt <stefan.winterfeldt@bitz.it>
+# Copyright 2014 Stefan Winterfeldt <stefan.winterfeldt@bitz.it>
 #                                  <stefan.winterfeldt@outlook.de>
 #
 #This file is part of Buildicator.
@@ -25,26 +25,29 @@ appropriate args dictionary.
 from messageSinks.abstractMessageSink import AbstractMessageSink
 import libs.statusEnum as statusEnum
 
-class ConsoleMessageSink (AbstractMessageSink):
-	"""A message sink that simply displays messages on the console.
-	
-	This message sink uses the following arguments:
-		errorMessage - The message to display in case of an error status.
-		failureMessage - The message to display in case of a failure status.
-		successMessage - The message to display in case of a success status.
-	"""
-	def __init__ (self, args):
-		self.errorMessage = args['errorMessage']
-		self.failureMessage = args['failureMessage']
-		self.successMessage = args['successMessage']
-		
-	def showStatus (self, status):
-		if status == statusEnum.STATUS_ERROR:
-			print (self.errorMessage)
-		elif status == statusEnum.STATUS_FAILURE:
-			print (self.failureMessage)
-		elif status == statusEnum.STATUS_SUCCESS:
-			print (self.successMessage)
-			
-def getInstance (args):
-	return ConsoleMessageSink (args)
+
+class ConsoleMessageSink(AbstractMessageSink):
+    """A message sink that simply displays messages on the console.
+
+    This message sink uses the following arguments:
+        errorMessage - The message to display in case of an error status.
+        failureMessage - The message to display in case of a failure status.
+        successMessage - The message to display in case of a success status.
+    """
+
+    def __init__(self, args):
+        self.errorMessage = args['errorMessage']
+        self.failureMessage = args['failureMessage']
+        self.successMessage = args['successMessage']
+
+    def showStatus(self, status):
+        if status == statusEnum.STATUS_ERROR:
+            print(self.errorMessage)
+        elif status == statusEnum.STATUS_FAILURE:
+            print(self.failureMessage)
+        elif status == statusEnum.STATUS_SUCCESS:
+            print(self.successMessage)
+
+
+def getInstance(args):
+    return ConsoleMessageSink(args)

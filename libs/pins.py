@@ -1,4 +1,4 @@
-#Copyright 2014 Stefan Winterfeldt <stefan.winterfeldt@bitz.it>
+# Copyright 2014 Stefan Winterfeldt <stefan.winterfeldt@bitz.it>
 #                                  <stefan.winterfeldt@outlook.de>
 #
 #This file is part of Buildicator.
@@ -24,30 +24,36 @@ file system interface of the gpio pins on a Raspberry Pi.
 
 import os.path
 
-def export (pin):
-	f = open ('/sys/class/gpio/export', 'w')
-	f.write (str (pin))
-	f.close ()
 
-def pinExists (pin):
-	return os.path.isdir ('/sys/class/gpio/gpio'+str(pin))
-	
-def setDirectionOut (pin):
-	f = open ('/sys/class/gpio/gpio'+str (pin)+'/direction', 'w')
-	f.write ('out')
-	f.close ()
-	
-def setOff (pin):
-	f = open ('/sys/class/gpio/gpio'+str (pin)+'/value', 'w')
-	f.write ('0')
-	f.close ()
-	
-def setOn (pin):
-	f = open ('/sys/class/gpio/gpio'+str (pin)+'/value', 'w')
-	f.write ('1')
-	f.close ()
-	
-def unexport (pin):
-	f = open ('/sys/class/gpio/unexport', 'w')
-	f.write (str (pin))
-	f.close ()
+def export(pin):
+    f = open('/sys/class/gpio/export', 'w')
+    f.write(str(pin))
+    f.close()
+
+
+def pinExists(pin):
+    return os.path.isdir('/sys/class/gpio/gpio' + str(pin))
+
+
+def setDirectionOut(pin):
+    f = open('/sys/class/gpio/gpio' + str(pin) + '/direction', 'w')
+    f.write('out')
+    f.close()
+
+
+def setOff(pin):
+    f = open('/sys/class/gpio/gpio' + str(pin) + '/value', 'w')
+    f.write('0')
+    f.close()
+
+
+def setOn(pin):
+    f = open('/sys/class/gpio/gpio' + str(pin) + '/value', 'w')
+    f.write('1')
+    f.close()
+
+
+def unexport(pin):
+    f = open('/sys/class/gpio/unexport', 'w')
+    f.write(str(pin))
+    f.close()
