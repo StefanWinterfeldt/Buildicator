@@ -1,0 +1,50 @@
+{
+	"interval" : 20,
+	"projects" : [
+		{"name" : "TEST",
+			"connector" : {
+				"name" : "dummy",
+				"args" : {}
+			},
+			"messageSinks" : [
+				{
+					"name" : "rpiPin",
+					"args" : {
+						"errorPin" : 25,
+						"failurePin" : 8,
+						"successPin" : 7
+					}
+				},
+				{
+					"name" : "rpiSound",
+					"args" : {
+						"errorSound" : "/path/to/basic_error.wav",
+						"failureSound" : "/path/to/basic_failure.wav",
+						"successSound" : "/path/to/basic_success.wav"
+					}
+				}
+			]
+		},
+		{"name" : "TEST2",
+			"connector" : {
+				"name" : "teamCityREST8",
+				"args" : {
+					"url" : "http://teamcity.yourCompany.com",
+					"projectName" : "TestPipeline",
+					"userName" : "viewer",
+					"password" : "secretPassword"
+				}
+			},
+			"messageSinks" : [
+				{
+					"name" : "console",
+					"args" : {
+						"errorMessage" : "error",
+						"failureMessage" : "failure",
+						"successMessage" : "success"
+					}
+				}
+			]
+		}
+	]
+}

@@ -1,0 +1,21 @@
+{
+	"interval" : 10,
+	"projects" : [
+		{"name" : "MIMS",
+			"connector" : {
+				"name" : "dummy",
+				"args" : {}
+			},
+			"messageSinks" : [
+				{
+					"name" : "console",
+					"args" : {
+						"errorMessage" : "error",
+						"failureMessage" : "failure",
+						"successMessage" : "success"
+					}
+				}
+			]
+		}
+	]
+}
