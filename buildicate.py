@@ -1,7 +1,8 @@
 #!
 
 # Copyright 2014 Stefan Winterfeldt <stefan.winterfeldt@bitz.it>
-#                                  <stefan.winterfeldt@outlook.de>
+#                                   <stefan.winterfeldt@outlook.de
+#                BITZ GmbH          <info@bitz.it>
 #
 #This file is part of Buildicator.
 #
